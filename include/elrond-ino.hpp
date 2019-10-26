@@ -2,4 +2,6 @@
 #define _ELROND_INO_HPP
 
     #include "RuntimeApp.hpp"
+    #include "StaticConfigMemory.hpp"
+
 #endif

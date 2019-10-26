@@ -9,6 +9,7 @@
 
             class RuntimeApp;
             class DebugOut;
+            template<elrond::sizeT C> class StaticConfigMemory;
 
         }
     }
