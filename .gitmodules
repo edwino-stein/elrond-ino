@@ -1,0 +1,3 @@
+[submodule "elrond"]
+	path = elrond
+	url = https://github.com/edwino-stein/elrond-common.git
