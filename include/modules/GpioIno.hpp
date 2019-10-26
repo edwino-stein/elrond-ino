@@ -29,6 +29,29 @@
         #define INO_TOTAL_DO_PIN 54
         #define INO_TOTAL_AI_PIN 16
 
+    #elif defined ESP_PLATFORM
+
+        #define ESP_TOTAL_DO_PIN 40
+
+        #define ESP_ALLOW_PWM1 0xE80F014
+        #define ESP_ALLOW_PWM2 0x9F
+
+        #define ESP_PWM_FREQ 5000
+        #define ESP_PWM_RESO 8
+
+        #define ESP_SERVO_FREQ 50
+        #define ESP_SERVO_RESO 16
+        #define ESP_MIN_SERVO_PULSE_WIDTH 544
+        #define ESP_MAX_SERVO_PULSE_WIDTH 2400
+        #define ESP_SERVO_TAU_USEC 20000
+
+        #undef MAX_ANALOG_VALUE
+        #undef MIN_ANALOG_VALUE
+
+        #define MAX_ANALOG_VALUE 0xFFF
+        #define MIN_ANALOG_VALUE 0x0
+        #define ESP_ALLOW_AIN 0xFF0E00F015
+
     #endif
 
     namespace elrond {
@@ -57,6 +80,12 @@
 
                         bool initAInPin(elrond::gpio::BaseGpioPin &pin) const;
                         static elrond::word readAIn(elrond::gpio::BaseGpioPin &pin);
+
+                        #if defined ESP_PLATFORM
+                            static int espGetPwmChannelByPin(const int pin);
+                            static void espSetupPwmPin(const int pin, const int freq, const int res);
+                            static void espPwmWrite(const int pin, const elrond::word data);
+                        #endif
 
                     public:
                         GpioIno();

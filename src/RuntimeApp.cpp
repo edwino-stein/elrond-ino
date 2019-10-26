@@ -1,6 +1,10 @@
 #include "RuntimeApp.hpp"
 #include "modules/ModuleHandle.hpp"
 
+#if !defined LED_BUILTIN
+    #define LED_BUILTIN 2
+#endif
+
 using namespace elrond::runtime;
 using elrond::interfaces::RuntimeInterface;
 using elrond::interfaces::ModuleInterface;
