@@ -3,6 +3,8 @@
 
     #include "rtTypes.hpp"
 
+    #include "DebugOut.hpp"
+
     namespace elrond {
         namespace runtime {
 
@@ -13,6 +15,7 @@
 
                 public:
 
+                    elrond::runtime::DebugOut dbo;
                     elrond::modules::BaseGpioModule &getGpioService() const override;
                     elrond::modules::BaseInputDriverModule &getInputService(const elrond::sizeT id = 0) const override;
                     elrond::channel::BaseChannelManager &getChannelManager(const elrond::sizeT id = 0) const override;

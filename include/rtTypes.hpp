@@ -8,6 +8,8 @@
         namespace runtime {
 
             class RuntimeApp;
+            class DebugOut;
+
         }
     }
 

@@ -24,16 +24,16 @@ BaseChannelManager &RuntimeApp::getChannelManager(const elrond::sizeT id) const 
     elrond::error(STR("Invalid channel manager."));
 }
 
-const DebugOutInterface &RuntimeApp::dout() const {
-    elrond::error(STR("Invalid Debug service."));
-}
+const DebugOutInterface &RuntimeApp::dout() const { return this->dbo; }
 
 void RuntimeApp::onError(const char *error){
+    this->dbo.put(STR("ERROR: ")).putLn(error);
     RuntimeApp::fatalError();
 }
 
 #if defined INO_PLATFORM
     void RuntimeApp::onError(const __FlashStringHelper *error){
+        this->dbo.put(STR("ERROR: ")).putLn(error);
         RuntimeApp::fatalError();
     }
 #endif
