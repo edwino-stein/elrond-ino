@@ -6,6 +6,7 @@ using elrond::channel::BaseChannelManager;
 using elrond::runtime::RuntimeApp;
 using elrond::runtime::modules::ModuleHandle;
 
+ModuleHandle *elrond::runtime::modules::__looped__ = nullptr;
 
 void setup(void){
 
@@ -31,7 +32,22 @@ void setup(void){
     for(elrond::sizeT i = 0; i < elrond::runtime::modules::__total__; ++i)
         elrond::runtime::modules::__instances__[i].doInit();
 
+    //Start the instances
+    ModuleHandle **l = &elrond::runtime::modules::__looped__;
+    for(elrond::sizeT i = 0; i < elrond::runtime::modules::__total__; ++i){
+        ModuleHandle &m = elrond::runtime::modules::__instances__[i];
+        if(m.module->getLoopControl().allow){
+            *l = &m;
+            l = &(m._nextNode);
+        }
+        m.module->onStart();
+    }
 }
 
 void loop(void){
+    ModuleHandle *l = elrond::runtime::modules::__looped__;
+    while (l != nullptr){
+        l->doLoop();
+        l = l->_nextNode;
+    }
 }

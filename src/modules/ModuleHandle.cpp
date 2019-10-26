@@ -28,3 +28,9 @@ void ModuleHandle::nullInit(elrond::interfaces::ModuleInterface * const mod){
     elrond::config::ConfigMapAllocator c(scm);
     mod->onInit(c);
 }
+
+void ModuleHandle::doLoop(){
+    if(this->timout > elrond::millis()) return;
+    this->module->loop();
+    this->timout = elrond::millis() + this->module->getLoopControl().time;
+}

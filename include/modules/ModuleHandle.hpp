@@ -20,10 +20,15 @@
 
                         static void nullInit(elrond::interfaces::ModuleInterface * const mod);
                         void doInit() const;
+                        void doLoop();
+
+                    protected:
+                        unsigned long timout;
                 };
 
                 extern elrond::runtime::modules::ModuleHandle __instances__[];
                 extern const elrond::sizeT __total__;
+                extern elrond::runtime::modules::ModuleHandle *__looped__;
             }
         }
     }
