@@ -7,4 +7,6 @@
     #include "ChannelManager.hpp"
     #include "modules/ModuleHandle.hpp"
 
+    #include "modules/GpioIno.hpp"
+
 #endif

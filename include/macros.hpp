@@ -15,7 +15,8 @@
 
     #define _INSTANCE(inst, name, cfg) elrond::runtime::modules::ModuleHandle(inst, cfg, name)
     #define INSTANCE(name, cfg) _INSTANCE(&name, #name, cfg)
-    #define MODULES(...) elrond::runtime::modules::ModuleHandle elrond::runtime::modules::__instances__[]={ __VA_ARGS__ };\
+    #define MODULES(...) elrond::runtime::modules::ModuleHandle elrond::runtime::modules::__instances__[]={\
+                         _INSTANCE(&elrond::runtime::__app_inst__.gpio, "gpio-ino", NULL_CFG), __VA_ARGS__ };\
                          const elrond::sizeT elrond::runtime::modules::__total__ = sizeof(\
                          elrond::runtime::modules::__instances__)/sizeof(elrond::runtime::modules::ModuleHandle);
 

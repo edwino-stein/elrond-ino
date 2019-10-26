@@ -14,7 +14,7 @@ using elrond::interfaces::DebugOutInterface;
     ****************************************************************************/
 
 BaseGpioModule &RuntimeApp::getGpioService() const {
-    elrond::error(STR("Invalid GPIO driver."));
+    return (BaseGpioModule &) this->gpio;
 }
 
 BaseInputDriverModule &RuntimeApp::getInputService(const elrond::sizeT id) const {

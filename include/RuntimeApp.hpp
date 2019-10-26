@@ -4,6 +4,7 @@
     #include "rtTypes.hpp"
 
     #include "DebugOut.hpp"
+    #include "modules/GpioIno.hpp"
 
     namespace elrond {
         namespace runtime {
@@ -17,6 +18,7 @@
 
                     elrond::channel::BaseChannelManager *chm = nullptr;
                     elrond::runtime::DebugOut dbo;
+                    elrond::runtime::modules::GpioIno gpio;
 
                     elrond::modules::BaseGpioModule &getGpioService() const override;
                     elrond::modules::BaseInputDriverModule &getInputService(const elrond::sizeT id = 0) const override;
