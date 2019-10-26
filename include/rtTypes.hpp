@@ -6,6 +6,8 @@
 
     namespace elrond {
         namespace runtime {
+
+            class RuntimeApp;
         }
     }
 
