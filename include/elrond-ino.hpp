@@ -8,5 +8,6 @@
     #include "modules/ModuleHandle.hpp"
 
     #include "modules/GpioIno.hpp"
+    #include "modules/Serial.hpp"
 
 #endif

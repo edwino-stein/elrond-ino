@@ -16,6 +16,7 @@
                 using cfgHandleT = void (*)(elrond::interfaces::ModuleInterface * const);
                 class ModuleHandle;
                 class GpioIno;
+                class SerialRxTransport;
             }
         }
     }
