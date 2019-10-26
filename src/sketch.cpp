@@ -2,6 +2,7 @@
 #include "RuntimeApp.hpp"
 #include "modules/ModuleHandle.hpp"
 
+using elrond::channel::BaseChannelManager;
 using elrond::runtime::RuntimeApp;
 using elrond::runtime::modules::ModuleHandle;
 
@@ -18,6 +19,13 @@ void setup(void){
     elrond::dout().put(STR("Elrond Runtime for Arduino v"))
                   .put(ELROND_API_VERSION).put('.').put(ELROND_API_REVISION)
                   .putLn(STR("-alpha"));
+
+    // Init the channel managers
+    BaseChannelManager *c = elrond::runtime::__app_inst__.chm;
+    while(c != nullptr){
+        c->init();
+        c = c->_nextNode;
+    }
 
     //Init all module instances
     for(elrond::sizeT i = 0; i < elrond::runtime::modules::__total__; ++i)

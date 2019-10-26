@@ -1,6 +1,10 @@
 #if !defined  _ELROND_MACROS_INO_HPP
 #define _ELROND_MACROS_INO_HPP
 
+    #define CONCAT_(x,y) x##y
+    #define CONCAT(x,y) CONCAT_(x,y)
+    #define UNIQUE_NAME(prefix) CONCAT(prefix, __COUNTER__)
+
     #define NULL_CFG elrond::runtime::modules::ModuleHandle::nullInit
     #define KEY_CFG(key, value) c.push(key, value);
     #define CONFIG(SIZE, ...) [](elrond::interfaces::ModuleInterface * const m){\
@@ -14,6 +18,8 @@
     #define MODULES(...) elrond::runtime::modules::ModuleHandle elrond::runtime::modules::__instances__[]={ __VA_ARGS__ };\
                          const elrond::sizeT elrond::runtime::modules::__total__ = sizeof(\
                          elrond::runtime::modules::__instances__)/sizeof(elrond::runtime::modules::ModuleHandle);
+
+    #define CH_MGR(TRANS, TXS, RXS) elrond::runtime::ChannelManager<TXS,RXS> UNIQUE_NAME(__chm_)(TRANS, elrond::runtime::__app_inst__);
 
     #define DEBUG(serial, speed) elrond::runtime::DebugOut::DOWrapper __dout_wrapper__(\
                                  serial, elrond::runtime::__app_inst__,[](){\

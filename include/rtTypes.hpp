@@ -10,6 +10,7 @@
             class RuntimeApp;
             class DebugOut;
             template<elrond::sizeT C> class StaticConfigMemory;
+            template<elrond::sizeT TXS, elrond::sizeT RXS> class ChannelManager;
 
             namespace modules {
                 using cfgHandleT = void (*)(elrond::interfaces::ModuleInterface * const);

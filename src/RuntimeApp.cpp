@@ -34,7 +34,17 @@ BaseInputDriverModule &RuntimeApp::getInputService(const elrond::sizeT id) const
 }
 
 BaseChannelManager &RuntimeApp::getChannelManager(const elrond::sizeT id) const {
-    elrond::error(STR("Invalid channel manager."));
+
+    BaseChannelManager *c = this->chm;
+    elrond::sizeT i = 0;
+
+    while(c != nullptr){
+        if(i++ == id) break;
+        c = c->_nextNode;
+    }
+
+    if(c == nullptr) elrond::error(STR("Invalid channel manager."));
+    return *c;
 }
 
 const DebugOutInterface &RuntimeApp::dout() const { return this->dbo; }
@@ -63,3 +73,8 @@ void RuntimeApp::fatalError(){
     #endif
 }
 
+void RuntimeApp::pushChannelManager(BaseChannelManager *chm){
+    BaseChannelManager **c = &(this->chm);
+    while(*c != nullptr) c = &((*c)->_nextNode);
+    *c = chm;
+}

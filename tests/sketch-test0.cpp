@@ -6,16 +6,19 @@ elrond::runtime::VirtualSerial Serial(std::cout);
 void stopLoop(int signum){ _loop = false; }
 
 elrond::modules::Example test;
+elrond::modules::Loopback transport;
 
 SETUP(
     MODULES(
         INSTANCE(test, CONFIG(100,
             KEY_CFG("allowLoop", true)
             KEY_CFG("timeLoop", 500)
-        ))
+        )),
+        INSTANCE(transport, NULL_CFG)
     ),
     OPTIONS(
         DEBUG(Serial, 0)
+        CH_MGR(transport, 5, 5)
     )
 )
 
