@@ -1,11 +1,10 @@
 #include "rtTypes.hpp"
 #include "RuntimeApp.hpp"
+#include "modules/ModuleHandle.hpp"
 
-using elrond::interfaces::RuntimeInterface;
 using elrond::runtime::RuntimeApp;
+using elrond::runtime::modules::ModuleHandle;
 
-RuntimeApp elrond::runtime::__app_inst__;
-RuntimeInterface *elrond::__rtInstance__ = nullptr;
 
 void setup(void){
 
@@ -19,6 +18,10 @@ void setup(void){
     elrond::dout().put(STR("Elrond Runtime for Arduino v"))
                   .put(ELROND_API_VERSION).put('.').put(ELROND_API_REVISION)
                   .putLn(STR("-alpha"));
+
+    //Init all module instances
+    for(elrond::sizeT i = 0; i < elrond::runtime::modules::__total__; ++i)
+        elrond::runtime::modules::__instances__[i].doInit();
 
 }
 

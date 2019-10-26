@@ -3,5 +3,7 @@
 
     #include "RuntimeApp.hpp"
     #include "StaticConfigMemory.hpp"
+    #include "macros.hpp"
+    #include "modules/ModuleHandle.hpp"
 
 #endif

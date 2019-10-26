@@ -11,6 +11,10 @@
             class DebugOut;
             template<elrond::sizeT C> class StaticConfigMemory;
 
+            namespace modules {
+                using cfgHandleT = void (*)(elrond::interfaces::ModuleInterface * const);
+                class ModuleHandle;
+            }
         }
     }
 

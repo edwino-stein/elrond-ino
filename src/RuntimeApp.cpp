@@ -1,4 +1,5 @@
 #include "RuntimeApp.hpp"
+#include "modules/ModuleHandle.hpp"
 
 using namespace elrond::runtime;
 using elrond::interfaces::RuntimeInterface;
@@ -17,7 +18,19 @@ BaseGpioModule &RuntimeApp::getGpioService() const {
 }
 
 BaseInputDriverModule &RuntimeApp::getInputService(const elrond::sizeT id) const {
-    elrond::error(STR("Invalid input service."));
+
+    BaseInputDriverModule *m = nullptr;
+    elrond::sizeT j = 0;
+
+    for(elrond::sizeT i = 0; i < elrond::runtime::modules::__total__; ++i){
+        if(elrond::runtime::modules::__instances__[i].module->getType() != elrond::ModuleType::INPUT) continue;
+        if(j++ != id) continue;
+        m = (BaseInputDriverModule *) elrond::runtime::modules::__instances__[i].module;
+        break;
+    }
+
+    if(m == nullptr) elrond::error(STR("Invalid input service."));
+    return *((BaseInputDriverModule *) m);
 }
 
 BaseChannelManager &RuntimeApp::getChannelManager(const elrond::sizeT id) const {
