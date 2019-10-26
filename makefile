@@ -20,8 +20,16 @@ vpath %.c $(SRC_DIR_ROOT)
 # *********************************** RULES ************************************
 include Arduino.mk
 
-# $(PROJECT_NAME): all
-
 all: arduino-zip
 clean: clean-dist
-clean-all: clean-dist
+clean-all: clean-dist clean-test
+
+test:
+	@$(MAKE) --no-print-directory -f tests.mk build/tests/$(notdir $(basename $(t)))
+	./build/tests/$(notdir $(basename $(t)))
+
+clean-test:
+	@$(MAKE) --no-print-directory -f tests.mk clean-build
+
+clean-test-all:
+	@$(MAKE) --no-print-directory -f tests.mk clean-build-all
