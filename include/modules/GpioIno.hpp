@@ -12,6 +12,25 @@
     #define MAX_ANALOG_VALUE 0x3FF
     #define MIN_ANALOG_VALUE 0x0
 
+    #if defined ARDUINO_AVR_NANO || defined ARDUINO_AVR_UNO
+
+        #define INO_ALLOW_PWM 0xE68
+        #define INO_TOTAL_DO_PIN 14
+
+        #if defined ARDUINO_AVR_NANO
+            #define INO_TOTAL_AI_PIN 8
+        #elif defined ARDUINO_AVR_UNO
+            #define INO_TOTAL_AI_PIN 6
+        #endif
+
+    #elif defined ARDUINO_AVR_MEGA2560 || defined ARDUINO_AVR_MEGA
+
+        #define INO_ALLOW_PWM 0x3FFC
+        #define INO_TOTAL_DO_PIN 54
+        #define INO_TOTAL_AI_PIN 16
+
+    #endif
+
     namespace elrond {
         namespace runtime {
             namespace modules {

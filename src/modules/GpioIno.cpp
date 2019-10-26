@@ -222,10 +222,26 @@ bool GpioIno::isValidDPin(const int pin) const {
 
 bool GpioIno::isValidPwmPin(const int pin) const {
 
+    #if defined ARDUINO_ARCH_AVR
+
         if(!this->isValidDPin(pin)) return false;
+
+        #if defined ARDUINO_AVR_MEGA2560 || ARDUINO_AVR_MEGA2560
+            if(pin > 13) return false;
+        #endif
+
+        return ((INO_ALLOW_PWM & (0x1 << pin)) >> pin) == 1;
+
+    #else
         return true;
+    #endif
 }
 
 bool GpioIno::isValidAPin(const int pin) const {
+    #if defined ARDUINO_ARCH_AVR
+        return (pin >= 0) && (pin < INO_TOTAL_AI_PIN);
+    #else
         return true;
+    #endif
 }
+
