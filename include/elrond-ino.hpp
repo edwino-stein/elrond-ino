@@ -9,5 +9,6 @@
 
     #include "modules/GpioIno.hpp"
     #include "modules/Serial.hpp"
+    #include "modules/WifiManager.hpp"
 
 #endif

@@ -3,7 +3,6 @@
 
     #include "elrond.hpp"
 
-
     namespace elrond {
         namespace runtime {
 
@@ -17,6 +16,7 @@
                 class ModuleHandle;
                 class GpioIno;
                 class SerialRxTransport;
+                class WifiManager;
             }
         }
     }
