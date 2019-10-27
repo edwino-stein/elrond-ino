@@ -10,5 +10,6 @@
     #include "modules/GpioIno.hpp"
     #include "modules/Serial.hpp"
     #include "modules/WifiManager.hpp"
+    #include "modules/UdpWifi.hpp"
 
 #endif
