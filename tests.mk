@@ -23,7 +23,7 @@ RAW_DLIBRARIES =
 
 # Elrond Common library setup
 COMMON_DIR = elrond
-COMMON_NAME_LIB = lib-elrond-common
+COMMON_NAME_LIB = libelrond
 COMMON_LIB = build/$(COMMON_NAME_LIB).a
 
 # if has a dev common version in the project, use it
