@@ -46,14 +46,20 @@ void Serial::loop(){
 
     #if defined INO_PLATFORM
 
-        if(!this->serial->available()) return;
-
         const elrond::sizeT length = this->cm->getRxBufferSize();
-        elrond::byte buffer[length];
+        const elrond::sizeT available = this->serial->available();
 
-        const elrond::sizeT received = this->serial->readBytes(buffer, length);
-        if(received == length) this->cm->onReceive(buffer, length);
-        this->serial->flush();
+        if(available >= length){
+
+            elrond::byte buffer[length];
+            const elrond::sizeT received = this->serial->readBytes(buffer, length);
+            if(available > length) this->serial->flush();
+
+            if(received == length) this->cm->onReceive(buffer, length);
+        }
+        else{
+            this->serial->flush();
+        }
 
     #endif
 }
