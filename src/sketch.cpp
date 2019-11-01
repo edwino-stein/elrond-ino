@@ -32,6 +32,8 @@ void setup(void){
     for(elrond::sizeT i = 0; i < elrond::runtime::modules::__total__; ++i)
         elrond::runtime::modules::__instances__[i].doInit();
 
+    elrond::dout().putLn(STR("Starting modules..."));
+
     //Start the instances
     ModuleHandle **l = &elrond::runtime::modules::__looped__;
     for(elrond::sizeT i = 0; i < elrond::runtime::modules::__total__; ++i){
@@ -42,12 +44,23 @@ void setup(void){
         }
         m.module->onStart();
     }
+
+    elrond::dout().putLn(STR("Application running..."));
 }
 
 void loop(void){
+
+    // Run modules with loop ativided
     ModuleHandle *l = elrond::runtime::modules::__looped__;
     while (l != nullptr){
         l->doLoop();
         l = l->_nextNode;
+    }
+
+    // Sync channel managers with data to transmit
+    BaseChannelManager *c = elrond::runtime::__app_inst__.chm;
+    while(c != nullptr){
+        c->txSync(false);
+        c = c->_nextNode;
     }
 }
