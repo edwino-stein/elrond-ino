@@ -15,10 +15,12 @@
                 using cfgHandleT = void (*)(elrond::interfaces::ModuleInterface * const);
                 class ModuleHandle;
                 class GpioIno;
-                class SerialRxTransport;
+                class Serial;
                 class WifiManager;
                 class UdpWifi;
             }
+
+            using Serial = modules::Serial;
         }
     }
 
